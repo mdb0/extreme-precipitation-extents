@@ -4,6 +4,12 @@ from pygam import GAM
 from pygam.distributions import Distribution
 from pygam.utils import ylogydu
 from functools import wraps
+import scipy.stats as stats
+import inspect
+import matplotlib.pyplot as plt
+import pandas as pd
+from scipy.stats import gamma
+from mpl_toolkits.mplot3d import Axes3D
 
 # --- 1. Helper Decorators (from pygam source) ---
 def multiply_weights(deviance):
@@ -186,11 +192,6 @@ class GPDGAM(GAM):
 
 
 ## visu ##############################################################################################
-import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
-from scipy.stats import gamma
-
 def plot_return_levels(weather_df, temp_df, gam_gamma, gam_logit, gam_gpd):
     print("Generating Figure 6: Seasonal Return Levels...")
 
@@ -285,8 +286,6 @@ def plot_return_levels(weather_df, temp_df, gam_gamma, gam_logit, gam_gpd):
     
     return seasonal_rl
 
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 
 def plot_gamma_gam(gam_model):
     fig, axs = plt.subplots(1, 4, figsize=(20, 5))
@@ -378,8 +377,6 @@ def plot_logistic_gam(gam_model):
     plt.tight_layout()
     plt.show()
 
-import scipy.stats as stats
-import inspect # Needed for the check inside the function
 
 def check_gpd_fit(gam_model, y_true, X_input):
     """
